@@ -59,3 +59,6 @@ gem 'rails_12factor', group: :production
 # Active Admin
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+
+#Semantic-UI-Sass
+gem 'semantic-ui-sass'
