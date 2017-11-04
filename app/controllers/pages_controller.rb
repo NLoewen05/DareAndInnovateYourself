@@ -1,7 +1,12 @@
 class PagesController < ApplicationController
 
-  def show
-    render "pages/#{params[:page]}"
+  def index
   end
 
+  def show
+    @page = params[:page]
+    render "pages/#{@page}"
+  end
+
+  
 end

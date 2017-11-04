@@ -9,7 +9,8 @@
   </head>
 
   <body>
-    <%= render  "common/main_menu" %>    
+    <%= render  "common/main_menu" unless @disable_main_menu %>
+    <%= render "common/pages_menu" unless @disable_pages_menu %>
     <div class="ui container">
       <%= yield %>
     </div>

@@ -1,0 +1,8 @@
+
+<div class="ui secondary pointing menu">
+  <div class="ui container">
+    <%= link_to "Home", root_path, class: 'item ' + (current_page?(root_path) ? 'active' : '') %>
+    <%= link_to "About", '/about', class: 'item ' + (current_page?('/about') ? 'active' : '') %>
+    <%= link_to "Contact", '/contact', class: 'item ' + (current_page?('/contact') ? 'active' : '') %>
+  </div>
+</div>

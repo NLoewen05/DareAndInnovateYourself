@@ -1,13 +1,26 @@
-<div class="ui secondary menu">
-    <div class="ui search">
-        <div class="ui left icon input">
-          <input class="prompt" type="text" placeholder="Search DIY">
-        </div>
-    </div>
-    <div class="right menu">
-      <%= link_to "Account", 'pages/home' ,class: "ui item" %>
-      <a class="ui item">
-        Logout
-      </a>
+<div id="main_menu" class="ui secondary menu">
+  <div class="ui item image">
+    <%= link_to image_tag("diy_tiny.png", class: 'ui bordered image'), root_path %>
+  </div>
+  <div class="ui item search">
+      <div class="ui left icon input">
+        <input class="prompt" type="text" placeholder="Search DIY">
+      </div>
+  </div>
+  
+  <% if user_signed_in? %>
+  <div class="ui dropdown item right">
+    <i class="user circle icon"></i>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <%= link_to  "Account", edit_user_registration_path, class: 'item' %>
+      <%= link_to  "Log Out", destroy_user_session_path, class: 'item', method: "DELETE" %>
     </div>
   </div>
+  <% else %>
+    <div class="ui item right">
+    <%= link_to  "Login", new_user_session_path, class: 'item' unless @disable_login_link %>
+    <%= link_to  "Register", new_user_registration_path, class: 'item' unless @disable_register_link %>
+    </div>
+  <% end %>
+</div>
