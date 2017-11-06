@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101154009) do
+ActiveRecord::Schema.define(version: 20171104202102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,20 @@ ActiveRecord::Schema.define(version: 20171101154009) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "address_type"
+    t.string "address_line"
+    t.string "city"
+    t.bigint "provinces_id"
+    t.string "postal_code"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+    t.index ["provinces_id"], name: "index_addresses_on_provinces_id"
+  end
+
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -44,6 +58,95 @@ ActiveRecord::Schema.define(version: 20171101154009) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "categorizable_type"
+    t.bigint "categorizable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categorizable_type", "categorizable_id"], name: "index_categories_on_categorizable_type_and_categorizable_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "sku_id"
+    t.bigint "order_id"
+    t.float "price"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["sku_id"], name: "index_line_items_on_sku_id"
+  end
+
+  create_table "option_values", force: :cascade do |t|
+    t.bigint "option_id"
+    t.string "value"
+    t.index ["option_id"], name: "index_option_values_on_option_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string "optionable_type"
+    t.bigint "optionable_id"
+    t.string "name"
+    t.index ["optionable_type", "optionable_id"], name: "index_options_on_optionable_type_and_optionable_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "charge_id"
+    t.datetime "order_date"
+    t.float "gst_rate"
+    t.float "pst_rate"
+    t.float "hst_rate"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.bigint "shop_id"
+    t.string "name"
+    t.string "caption"
+    t.text "description"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_products_on_shop_id"
+  end
+
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shops", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name"
+    t.text "description"
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_shops_on_user_id", unique: true
+  end
+
+  create_table "skus", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "sku"
+    t.float "price"
+    t.integer "quantity"
+    t.string "picture"
+    t.float "gst_rate"
+    t.float "pst_rate"
+    t.float "hst_rate"
+    t.boolean "is_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_skus_on_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +173,11 @@ ActiveRecord::Schema.define(version: 20171101154009) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "addresses", "provinces", column: "provinces_id"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "skus"
+  add_foreign_key "option_values", "options"
+  add_foreign_key "orders", "users"
+  add_foreign_key "products", "shops"
+  add_foreign_key "skus", "products"
 end
