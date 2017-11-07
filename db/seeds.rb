@@ -10,8 +10,8 @@ case Rails.env
 when 'development'
   AdminUser.create(:email => 'admin@example.com', :password => 'password',
                     :password_confirmation => 'password')
-  example_user = User.create(:email => 'user@example.com', :username => 'user',
-                            :password => 'password', :password_confirmation => 'password')
+  example_user = User.create!(:email => 'user@example.com', :username => 'user', :first_name => "Bob",
+                            :last_name => 'The User',:password => 'password', :password_confirmation => 'password')
 
   example_user.shop = Shop.new(:name => "Test Shop")
 
@@ -19,14 +19,12 @@ when 'development'
               'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia',
               'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan']
 
-  provinces.each { |p| Province.create(:name => p) }
+  provinces.each { |p| Province.create!(:name => p) }
 
   manitoba = Province.find_by(:name => "Manitoba")
 
-  example_user.addresses.build(address_type: "Billing", address_line: "95 Mallard Way",
-                               city: "Winnipeg", province: manitoba,
-                               postal_code: "R2R1P9").save        
-  example_user.addresses.build(address_type: "Delivery", address_line: "93 Garton Avenue",
-                               city: "Winnipeg", province: manitoba,
-                               postal_code: "R0R2D2").save
+  example_user.addresses.create!(address_type: "billing", address_line: "95 Mallard Way",
+                               city: "Winnipeg", province: manitoba, postal_code: "R2R1P9")    
+  example_user.addresses.create!(address_type: "delivery", address_line: "93 Garton Avenue",
+                               city: "Winnipeg", province: manitoba ,postal_code: "R0R2D2")
 end

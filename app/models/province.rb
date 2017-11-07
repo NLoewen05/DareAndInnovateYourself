@@ -1,3 +1,7 @@
 class Province < ApplicationRecord
-  belongs_to :address
+  # Associations
+  has_many :address
+
+  # Validations
+  validates :name, presence: true
 end

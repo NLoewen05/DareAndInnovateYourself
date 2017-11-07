@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :addresses, as: :addressable
   
   # Validations
-  validates :username, presence: true,
-                       uniqueness: true
+  validates :email, :username, presence: true, uniqueness: true
+  validates :first_name, :last_name, presence: true
   
   # Class Variables
   attr_accessor :login

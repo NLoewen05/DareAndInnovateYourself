@@ -69,6 +69,7 @@ class InitialModels < ActiveRecord::Migration[5.1]
 
     create_table :option_values do |t|
       t.belongs_to :option, foreign_key: true
+      t.belongs_to :sku, foreign_key: true
       t.string :value
     end
 
@@ -82,8 +83,8 @@ class InitialModels < ActiveRecord::Migration[5.1]
       t.string :address_type
       t.string :address_line
       t.string :city
-      t.belongs_to :provinces, foreign_key:true
       t.string :postal_code
+      t.belongs_to :province, foreign_key:true
       t.references :addressable, polymorphic: true, index: true
 
       t.timestamps

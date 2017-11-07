@@ -33,14 +33,14 @@ ActiveRecord::Schema.define(version: 20171104202102) do
     t.string "address_type"
     t.string "address_line"
     t.string "city"
-    t.bigint "provinces_id"
     t.string "postal_code"
+    t.bigint "province_id"
     t.string "addressable_type"
     t.bigint "addressable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
-    t.index ["provinces_id"], name: "index_addresses_on_provinces_id"
+    t.index ["province_id"], name: "index_addresses_on_province_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -83,8 +83,10 @@ ActiveRecord::Schema.define(version: 20171104202102) do
 
   create_table "option_values", force: :cascade do |t|
     t.bigint "option_id"
+    t.bigint "sku_id"
     t.string "value"
     t.index ["option_id"], name: "index_option_values_on_option_id"
+    t.index ["sku_id"], name: "index_option_values_on_sku_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -173,10 +175,11 @@ ActiveRecord::Schema.define(version: 20171104202102) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  add_foreign_key "addresses", "provinces", column: "provinces_id"
+  add_foreign_key "addresses", "provinces"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "skus"
   add_foreign_key "option_values", "options"
+  add_foreign_key "option_values", "skus"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "shops"
   add_foreign_key "skus", "products"

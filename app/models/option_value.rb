@@ -1,3 +1,8 @@
 class OptionValue < ApplicationRecord
-  belongs_to :option_value
+  # Associations
+  belongs_to :option
+  belongs_to :sku
+
+  # Validations
+  validates :value, presence: true
 end
