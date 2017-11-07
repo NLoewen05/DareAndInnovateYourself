@@ -63,11 +63,8 @@ ActiveRecord::Schema.define(version: 20171104202102) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "categorizable_type"
-    t.bigint "categorizable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["categorizable_type", "categorizable_id"], name: "index_categories_on_categorizable_type_and_categorizable_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -111,12 +108,14 @@ ActiveRecord::Schema.define(version: 20171104202102) do
 
   create_table "products", force: :cascade do |t|
     t.bigint "shop_id"
+    t.bigint "category_id"
     t.string "name"
     t.string "caption"
     t.text "description"
     t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["shop_id"], name: "index_products_on_shop_id"
   end
 

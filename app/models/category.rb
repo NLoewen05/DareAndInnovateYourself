@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
   # Associations
-  belongs_to :categorizable, polymorphic: true
+  has_many :products
 
   # Validations
   validates :name, presence: true, uniqueness: true

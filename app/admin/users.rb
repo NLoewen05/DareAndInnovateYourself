@@ -1,4 +1,8 @@
 ActiveAdmin.register User do
+
+  permit_params :email, :username, :first_name, :last_name,
+                :phone_number, :profile_picture, :date_of_birth
+
   index do
     selectable_column
     excluded_columns = ["encrypted_password", "reset_password_token", "reset_password_sent_at"]
@@ -16,17 +20,17 @@ ActiveAdmin.register User do
   filter :date_of_birth
   filter :phone_number
 
-  
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :email, :username, :first_name, :last_name, :phone_number, :profile_picture, :date_of_birth
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+  form do |f|
+    f.inputs do
+      f.input :first_name
+      f.input :last_name
+      f.input :date_of_birth
+      f.input :phone_number
+      f.input :username
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+    end
+    f.actions
+  end
 end

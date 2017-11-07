@@ -11,4 +11,7 @@ class Sku < ApplicationRecord
   validates :quantity, numericality: { only_integer: true}
   validates :price, numericality: true
   
+  def name
+    product.name + ' - ' + id.to_s
+  end
 end

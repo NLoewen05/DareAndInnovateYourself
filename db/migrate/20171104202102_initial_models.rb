@@ -3,7 +3,6 @@ class InitialModels < ActiveRecord::Migration[5.1]
     create_table :categories do |t|
       t.string :name
       t.text :description
-      t.references :categorizable, polymorphic: true, index: true
 
       t.timestamps
     end
@@ -18,7 +17,8 @@ class InitialModels < ActiveRecord::Migration[5.1]
     end
 
     create_table :products do |t|
-      t.belongs_to :shop, foreign_key: true 
+      t.belongs_to :shop, foreign_key: true
+      t.belongs_to :category
       t.string :name
       t.string :caption
       t.text :description
