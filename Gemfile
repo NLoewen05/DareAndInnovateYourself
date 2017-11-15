@@ -62,3 +62,6 @@ gem 'activeadmin', github: 'activeadmin'
 
 #Semantic-UI-Sass
 gem 'semantic-ui-sass'
+
+#Stripe
+gem 'stripe'
