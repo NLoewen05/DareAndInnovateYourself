@@ -1,9 +1,9 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-// You can use CoffeeScript in this file: http://coffeescript.org/
+// Pages Javascript
 
 var ready = function(){
-  $('.ui.dropdown').dropdown();
+  $('.ui.dropdown').dropdown({
+    action: 'select'
+  });
 }
 
 $(document).ready(ready);

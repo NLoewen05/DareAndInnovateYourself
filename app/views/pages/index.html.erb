@@ -1,26 +1,6 @@
-
-<div class="ui segment">
-  <h2>Products</h2>
-  <div class="ui cards five column grid">
-    <% @products.each do |product| next unless product.is_active %>
-    <div class="card">
-        <div class="image">
-          <%= image_tag  "placeholder.png" %>
-        </div>
-        <div class="content">
-          <div class="header"><%= product.name %></div>
-          <div class="meta">
-            <a><%= product.shop.name %></a>
-          </div>
-          <div class="description">
-            <p><%= product.caption %></p>
-          </div>
-        </div>
-        <div class="extra content">
-          <span></span>
-        </div>
-    </div>
-    <% end %>
-  </div>
+<div class="ui piled segments">
+  <%= render partial: 'categories/category_products',
+             collection: @categories,
+             as: :category,
+             locals: {product_limit: 5 }%>
 </div>
-

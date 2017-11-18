@@ -1,0 +1,32 @@
+<% #default locals
+  product_limit = 0 if local_assigns[:product_limit].nil?
+  category_products = local_assigns[:category].nil? ? category.products.limit(product_limit) : category.products
+%>
+
+<div class="ui <%= "blue" unless defined? local_assigns[:category_iteration] && category_iteration.first? %> segment">
+  <div class="ui large header">
+    <span><%= category.name %></span>
+    <span class="right floated meta"><%= link_to  "View all", root_path %></span>
+  </div>
+  <div class="ui cards five column grid">
+    <% category_products.each do |product| next unless product.is_active %>
+    <div class="card">
+      <div class="image">
+        <%= image_tag  "placeholder.png" %>
+      </div>
+      <div class="content">
+        <div class="header"><%= product.name %></div>
+        <div class="meta">
+          <a><%= product.shop.name %></a>
+        </div>
+        <div class="description">
+          <p><%= product.caption %></p>
+        </div>
+      </div>
+      <div class="extra content">
+        <span></span>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

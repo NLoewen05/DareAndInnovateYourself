@@ -60,8 +60,14 @@ gem 'rails_12factor', group: :production
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 
-#Semantic-UI-Sass
+# Semantic-UI-Sass
 gem 'semantic-ui-sass'
 
-#Stripe
+# Stripe
 gem 'stripe'
+
+# Paperclip
+gem 'paperclip'
+
+# Amazon Web Services (AWS)
+gem 'aws-sdk', '~> 2'

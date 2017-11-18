@@ -2,7 +2,8 @@ class PagesController < ApplicationController
 
   def index
     @categories = Category.all
-    @products = Product.all
+    @featured_categories = Category.where(id: User.pluck(:id).sample(5))
+    
   end
 
   def show
@@ -10,5 +11,4 @@ class PagesController < ApplicationController
     render "pages/#{@page}"
   end
 
-  
 end

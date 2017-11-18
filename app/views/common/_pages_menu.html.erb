@@ -2,6 +2,18 @@
 <div class="ui secondary pointing menu">
   <div class="ui container">
     <%= link_to "Home", root_path, class: 'item ' + (current_page?(root_path) ? 'active' : '') %>
+    <div class="ui pointing dropdown item">
+      <div class="text">Categories</div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <% @categories.each do |category| %>
+          <div class="item">
+            <span class=""></span>
+            <%= link_to category.name, category, class: 'item' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
     <%= link_to "About", '/about', class: 'item ' + (current_page?('/about') ? 'active' : '') %>
     <%= link_to "Contact", '/contact', class: 'item ' + (current_page?('/contact') ? 'active' : '') %>
   </div>
