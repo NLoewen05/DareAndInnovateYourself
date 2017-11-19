@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104202102) do
+ActiveRecord::Schema.define(version: 20171118231534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,13 +140,16 @@ ActiveRecord::Schema.define(version: 20171104202102) do
     t.string "sku"
     t.float "price"
     t.integer "quantity"
-    t.string "picture"
     t.float "gst_rate"
     t.float "pst_rate"
     t.float "hst_rate"
     t.boolean "is_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "picture_file_name"
+    t.string "picture_content_type"
+    t.integer "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["product_id"], name: "index_skus_on_product_id"
   end
 

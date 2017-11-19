@@ -12,4 +12,36 @@ ActiveAdmin.register Sku do
 #   permitted
 # end
   menu parent: "Products"
+
+  permit_params :product_id, :sku, :price, :quantity, :gst_rate, :pst_rate, :hst_rate, :picture
+
+  form do |f|
+    f.inputs do 
+      f.input :product
+      f.input :sku
+      f.input :price
+      f.input :quantity
+      f.input :gst_rate
+      f.input :pst_rate
+      f.input :hst_rate
+      f.input :picture, as: :file, hint: image_tag(f.object.picture.url(:medium))
+    end
+    f.actions
+  end
+
+  show do |ad|
+    attributes_table do
+      row :product_id
+      row :sku
+      row :price
+      row :quantity
+      row :gst_rate
+      row :pst_rate
+      row :hst_rate
+      row :picture do
+        image_tag(ad.picture.url(:medium))
+      end
+      # Will display the image on show object page
+    end
+  end
 end
