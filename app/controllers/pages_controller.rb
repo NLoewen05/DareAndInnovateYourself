@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   end
 
   def show
+    @disable_pages_menu = true
     @page = params[:page]
     render "pages/#{@page}"
   end
