@@ -36,6 +36,32 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <h2>Addresses</h2>
+
+  <%= f.fields_for :addresses do |address_field| %>
+    <%= address_field.hidden_field :id %>
+    <%= address_field.label :address_type %><br />
+    <% address_type_array = [ Address::TYPE_SHIPPING, Address::TYPE_BILLING, Address::TYPE_DELIVERY ] %>
+    <%= address_field.select :address_type, options_for_select(address_type_array) %>
+
+    <div class="field">
+      <%= address_field.label :address_line %><br />
+      <%= address_field.text_field :address_line %>
+    </div>
+    <div class="field">
+      <%= address_field.label :city %><br />
+      <%= address_field.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_field.label :province_id %><br />
+      <%= address_field.collection_select(:province_id, Province.all, :id, :name ) %>
+    </div>
+    <div class="field">
+        <%= address_field.label :postal_code %><br />
+        <%= address_field.text_field :postal_code %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>

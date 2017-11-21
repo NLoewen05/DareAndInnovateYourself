@@ -8,19 +8,25 @@
       </div>
   </div>
   
-  <% if user_signed_in? %>
-  <div class="ui dropdown item right">
-    <i class="user circle icon"></i>
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <%= link_to  "Account", edit_user_registration_path, class: 'item' %>
-      <%= link_to  "Log Out", destroy_user_session_path, class: 'item', method: "DELETE" %>
-    </div>
+  <div class="ui item right">
+    <% if user_signed_in? %>
+      <% if current_user.shop.nil? %>
+        <%= link_to  "Open Your Shop!", new_shop_path, class: "item" %>
+      <% else %>
+        <%= link_to  "Your Shop", shop_path(current_user.shop), class: "item" %>
+      <% end %>
+
+      <div class="ui dropdown item">
+        <i class="user circle icon"></i>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <%= link_to  "Account", edit_user_registration_path, class: 'item' %>
+          <%= link_to  "Log Out", destroy_user_session_path, class: 'item', method: "DELETE" %>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to  "Login", new_user_session_path, class: 'item' unless @disable_login_link %>
+      <%= link_to  "Register", new_user_registration_path, class: 'item' unless @disable_register_link %>
+    <% end %>
   </div>
-  <% else %>
-    <div class="ui item right">
-    <%= link_to  "Login", new_user_session_path, class: 'item' unless @disable_login_link %>
-    <%= link_to  "Register", new_user_registration_path, class: 'item' unless @disable_register_link %>
-    </div>
-  <% end %>
 </div>

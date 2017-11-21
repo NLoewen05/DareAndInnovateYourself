@@ -11,5 +11,5 @@ ActiveAdmin.register Option do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  menu false
+  menu parent: "Products"
 end

@@ -36,6 +36,28 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <h3>Shipping Address</h3>
+
+  <%= f.fields_for :addresses do |address_field| %>
+    <%= address_field.hidden_field :address_type, value: Address::TYPE_SHIPPING %>
+    <div class="field">
+      <%= address_field.label :address_line %><br />
+      <%= address_field.text_field :address_line %>
+    </div>
+    <div class="field">
+      <%= address_field.label :city %><br />
+      <%= address_field.text_field :city %>
+    </div>
+    <div class="field">
+      <%= address_field.label :province_id %><br />
+      <%= address_field.collection_select(:province_id, Province.all, :id, :name ) %>
+    </div>
+    <div class="field">
+        <%= address_field.label :postal_code %><br />
+        <%= address_field.text_field :postal_code %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

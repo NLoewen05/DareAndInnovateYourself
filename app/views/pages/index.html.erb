@@ -1,6 +1,6 @@
-<div class="ui piled segments">
+<div class="ui raised segments">
   <%= render partial: 'categories/category_products',
              collection: @categories,
              as: :category,
-             locals: {product_limit: 5 }%>
+             locals: { product_limit: 5 }%>
 </div>

@@ -1,7 +1,7 @@
 class Address < ApplicationRecord
   # Associations
   belongs_to :province
-  belongs_to :addressable, polymorphic: true
+  belongs_to :addressable, polymorphic: true, optional: true
 
   # Validations
   validates :address_type, :address_line, :city, :postal_code, presence: true

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   # Devise
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :trackable, :validatable,
@@ -12,6 +13,9 @@ class User < ApplicationRecord
   # Validations
   validates :email, :username, presence: true, uniqueness: true
   validates :first_name, :last_name, presence: true
+  validates_associated :addresses
+
+  accepts_nested_attributes_for :addresses
   
   # Class Variables
   attr_accessor :login
@@ -22,4 +26,5 @@ class User < ApplicationRecord
     login = conditions.delete(:login)
     where(conditions).where(["lower(username) = :value OR lower(email) = :value", {value: login.strip.downcase}]).first
   end
+
 end

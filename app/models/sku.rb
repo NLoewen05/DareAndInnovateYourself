@@ -10,7 +10,7 @@ class Sku < ApplicationRecord
     square: '200x200#',
     medium: '300x300>',
     large: '1024x1024>'
-  }, :default_url => "/assets/placeholder.png"
+  }, :default_url => ":style/placeholder.png"
 
   # Validations
   validates :price, :quantity, presence: true

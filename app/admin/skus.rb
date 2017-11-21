@@ -11,7 +11,7 @@ ActiveAdmin.register Sku do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  menu parent: "Products"
+  menu parent: "Products", priority: 1
 
   permit_params :product_id, :sku, :price, :quantity, :gst_rate, :pst_rate, :hst_rate, :picture
 

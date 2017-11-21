@@ -4,6 +4,7 @@ var ready = function(){
   $('.ui.dropdown').dropdown({
     action: 'select'
   });
+
 }
 
 $(document).ready(ready);

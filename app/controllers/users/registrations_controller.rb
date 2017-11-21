@@ -1,11 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :initialize_actions
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
-    @disable_register_link = true
-    super
+    super do |resource|
+      resource.addresses.build
+    end
   end
 
   # POST /resource
@@ -15,7 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    @disable_pages_menu = true
     super
   end
 
@@ -38,19 +39,30 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def initialize_actions
+    @disable_register_link = true
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up,
-      keys: [:first_name, :last_name, :phone_number, :profile_picture, :date_of_birth])
+    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
+      user_params.permit(:username,:email, :password, :password_confirmation,
+       :first_name, :last_name, :phone_number, :profile_picture, :date_of_birth,
+       addresses_attributes: [:address_type, :address_line, :city, :province_id, :postal_code])
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update,
-      keys: [:first_name, :last_name, :phone_number, :profile_picture])
+    devise_parameter_sanitizer.permit(:account_update) do |user_params|
+      user_params.permit(:username, :email, :password, :password_confirmation, :current_password,
+       :first_name, :last_name, :phone_number, :profile_picture, :date_of_birth,
+       addresses_attributes: [:id, :address_type, :address_line, :city, :province_id, :postal_code])
+    end
   end
+
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
