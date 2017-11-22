@@ -17,7 +17,7 @@ class Sku < ApplicationRecord
   validates :quantity, numericality: { only_integer: true}
   validates :price, numericality: true
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\Z/ }
-  
+
   def name
     product.name + ' - ' + id.to_s
   end

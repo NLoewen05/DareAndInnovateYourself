@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :shop, except: :index do 
+  resources :shop do 
     resources :products
   end
 

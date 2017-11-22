@@ -1,0 +1,28 @@
+
+<h2>Create Your Shop</h2>
+
+<%= form_for( @shop, url: {action: "create"}, html: { class: "ui form"}) do |f|  %>
+  <h3 class="ui dividing header">Shop Details</h3>
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <h3 class="ui dividing header">Define Your Products</h3>
+  <%= f.nested_fields_for :products do |product_f|%>
+    <div class="field">
+      <%= product_f.label :name %><br/>
+      <%= product_f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= product_f.label :description %><br />
+      <%= product_f.text_area :description %>
+    </div> 
+    <% end %>
+    <%= product_f.add_nested_fields_link :products, 'Add New Product', class: "ui button" %>  
+    <%= product_f.remove_nested_fields_link 'Delete Product', data: { confirm: 'Are you sure?'}, class: "ui button" %>
+  <% end %>
+<% end %>

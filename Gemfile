@@ -71,3 +71,6 @@ gem 'paperclip'
 
 # Amazon Web Services (AWS)
 gem 'aws-sdk', '~> 2'
+
+# Nested Form Fields
+gem 'nested_form_fields'

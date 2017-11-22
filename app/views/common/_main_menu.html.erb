@@ -1,4 +1,4 @@
-<div id="main_menu" class="ui secondary menu">
+<nav id="main_menu" class="ui secondary menu">
   <div class="ui item image">
     <%= link_to image_tag("diy_tiny.png", class: 'ui bordered image'), root_path %>
   </div>
@@ -29,4 +29,4 @@
       <%= link_to  "Register", new_user_registration_path, class: 'item' unless @disable_register_link %>
     <% end %>
   </div>
-</div>
+</nav>

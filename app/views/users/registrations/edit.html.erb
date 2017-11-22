@@ -1,26 +1,30 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "ui form", method: :put }) do |f| %>
   <%= devise_error_messages! %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <h3 class="ui dividing header">Account Information</h3>
 
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
-  <div>
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
+  <div class="two fields">
+    <div class="field">
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </div>
 
-  <div>
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <div class="field">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
 
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -36,30 +40,36 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <h2>Addresses</h2>
+  <h3 class="ui dividing header">Addresses</h3>
 
-  <%= f.fields_for :addresses do |address_field| %>
+  <%= f.nested_fields_for :addresses do |address_field| %>
     <%= address_field.hidden_field :id %>
     <%= address_field.label :address_type %><br />
     <% address_type_array = [ Address::TYPE_SHIPPING, Address::TYPE_BILLING, Address::TYPE_DELIVERY ] %>
     <%= address_field.select :address_type, options_for_select(address_type_array) %>
 
-    <div class="field">
-      <%= address_field.label :address_line %><br />
-      <%= address_field.text_field :address_line %>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= address_field.label :address_line %><br />
+        <%= address_field.text_field :address_line %>
+      </div>
+      <div class="four wide field">
+        <%= address_field.label :city %><br />
+        <%= address_field.text_field :city %>
+      </div>
     </div>
-    <div class="field">
-      <%= address_field.label :city %><br />
-      <%= address_field.text_field :city %>
-    </div>
-    <div class="field">
-      <%= address_field.label :province_id %><br />
-      <%= address_field.collection_select(:province_id, Province.all, :id, :name ) %>
-    </div>
-    <div class="field">
+    <div class="two fields">
+      <div class="field">
+        <%= address_field.label :province_id %><br />
+        <%= address_field.collection_select(:province_id, Province.all, :id, :name ) %>
+      </div>
+      <div class="field">
         <%= address_field.label :postal_code %><br />
         <%= address_field.text_field :postal_code %>
+      </div>
     </div>
+    <%= f.add_nested_fields_link :addresses, 'Add New Address', class: "ui button" %>  
+    <%= address_field.remove_nested_fields_link 'Delete Address', data: { confirm: 'Are you sure?'}, class: "ui button" %>
   <% end %>
 
   <div class="field">
@@ -67,11 +77,13 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
+  <div class="field actions">
     <%= f.submit "Update" %>
+    <%= link_to "Back", :back, class: "ui button"%>
+  </div>
+  <div class="field">
+      <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %>
   </div>
 <% end %>
 
-<p><%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>

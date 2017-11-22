@@ -15,3 +15,4 @@
 //= require_tree .
 //= require semantic-ui
 //= require pages
+//= require nested_form_fields

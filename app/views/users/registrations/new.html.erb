@@ -38,7 +38,7 @@
 
   <h3>Shipping Address</h3>
 
-  <%= f.fields_for :addresses do |address_field| %>
+  <%= f.nested_fields_for :addresses do |address_field| %>
     <%= address_field.hidden_field :address_type, value: Address::TYPE_SHIPPING %>
     <div class="field">
       <%= address_field.label :address_line %><br />
