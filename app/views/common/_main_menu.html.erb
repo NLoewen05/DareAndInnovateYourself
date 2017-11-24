@@ -2,11 +2,14 @@
   <div class="ui item image">
     <%= link_to image_tag("diy_tiny.png", class: 'ui bordered image'), root_path %>
   </div>
-  <div class="ui item search">
-      <div class="ui left icon input">
-        <input class="prompt" type="text" placeholder="Search DIY">
-      </div>
+  <div id="main_search" class="ui item search">
+    <div class="ui left icon input">
+      <input class="prompt" type="text" placeholder="Search DIY">
+      <i class="search icon"></i>
+    </div>
   </div>
+  <%= select_tag "search_category", options_for_select(@categories.map{ |x| [x.name,x.id] }.unshift(['All Categories', 0]) , 0),
+  class: "ui input item" %>
   
   <div class="ui item right">
     <% if user_signed_in? %>

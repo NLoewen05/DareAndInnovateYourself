@@ -13,7 +13,7 @@ class Sku < ApplicationRecord
   }, :default_url => ":style/placeholder.png"
 
   # Validations
-  validates :price, :quantity, presence: true
+  validates :price, :quantity, :picture, presence: true
   validates :quantity, numericality: { only_integer: true}
   validates :price, numericality: true
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\Z/ }

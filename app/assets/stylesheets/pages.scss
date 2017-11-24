@@ -5,3 +5,19 @@
 #main_menu{
   margin: 20px 50px;
 }
+
+#search_category{
+  outline: none;
+
+  &:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+  }
+
+  &:focus{
+    background-color: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.95);
+    cursor: pointer;
+  }
+}
