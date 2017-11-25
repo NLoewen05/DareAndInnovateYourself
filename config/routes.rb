@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get 'products/search' => 'products#search'
+  get '/products' => 'products#index'
 
   resources :shop do 
     resources :products

@@ -2,6 +2,15 @@ class ProductsController < ApplicationController
   before_action :initialize_actions
 
   def index
+    @json_response = {
+      "products": []
+    }
+
+    @products = Product.all
+
+    @json_response['products'] = @products
+    
+    render json: @json_response, include: [:skus, :category => {only: :name}]
   end
 
   def show
