@@ -16,12 +16,12 @@
     <div class="ui fluid card">
       <div class="content">
         <h3 class="ui dividing header center aligned"><%= @product.name %></h3>
-        <h3 class="ui header center aligned"><%= number_to_currency(@product.skus.first.price, prescision: 2) %></h3>
+        <span class="ui blue ribbon label"><strong>In Stock:</strong> <%= @product.skus.first.quantity %></span>  
+        <h3 class="ui header center aligned nomargin"><%= number_to_currency(@product.skus.first.price, prescision: 2) %></h3>
         <h3 class="ui dividing header">Product Details</h3>
         <div class="meta">Updated <%= time_ago_in_words(@product.skus.first.updated_at.to_time) %> ago</div>
         <div class="description">
           <p><strong>Caption:</strong> <%= @product.caption %></p>
-          <p><strong>Quantity:</strong> <%= @product.skus.first.quantity %></p>  
           <p><strong>Description:</strong> <%= @product.description %></p>
         </div>
       </div>

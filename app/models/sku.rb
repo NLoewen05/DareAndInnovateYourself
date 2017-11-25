@@ -23,6 +23,6 @@ class Sku < ApplicationRecord
   end
 
   def picture_url
-    picture.url
+    'http://' + picture.url
   end
 end

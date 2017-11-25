@@ -29,7 +29,7 @@ var ready = function(){
           $.each(response, function(index, item){
             res.results.push({
               title       : item.name,
-              description : item.description,
+              description : item.caption,
               url         : '/shop/' + item.shop_id + '/products/' + item.id
             });
           });
