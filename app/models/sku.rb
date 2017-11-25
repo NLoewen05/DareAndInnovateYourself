@@ -21,4 +21,8 @@ class Sku < ApplicationRecord
   def name
     product.name + ' - ' + id.to_s
   end
+
+  def picture_url
+    picture.url
+  end
 end

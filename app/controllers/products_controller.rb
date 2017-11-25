@@ -10,7 +10,10 @@ class ProductsController < ApplicationController
 
     @json_response['products'] = @products
     
-    render json: @json_response, include: [:skus, :category => {only: :name}]
+    respond_to do |format|
+      format.html
+      format.json { render json: @json_response, include: [:skus => {methods: [:picture_url]}, :category => {only: :name}] }
+    end
   end
 
   def show
