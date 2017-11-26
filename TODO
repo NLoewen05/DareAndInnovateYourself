@@ -1,0 +1,9 @@
+
+Todo:
+  ☐ Modify Tables for SKU, and Orders with regard to Tax rates
+  ☐ Modify Table for OptionValue, make option_id unique
+  ☐ Add Shopping Cart Functionality
+    ☐ Use Cart as Session
+    ☐ When User Clicks on Cart, it goes to order page
+  ☐ Add Carousel to product show page
+  ☐ 

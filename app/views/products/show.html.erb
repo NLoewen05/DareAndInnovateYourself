@@ -1,32 +1,36 @@
 
 <section class="ui grid">
-  <div class="two wide column">
-    <div class="ui segment ">
-      <ul class="ui images" id="sku_images">
-        <%= @product.skus.each do |sku| %>
-          <li><%= image_tag sku.picture.url(:thumb), class: "ui image fluid" %></li>
+  <div class="ten wide column">
+    <%= image_tag @product.skus.first.picture.url(:large), class: "ui image fluid"  %>
+    <div class="ui menu">
+        <% @product.skus.each_with_index do |sku, i| %>
+          <%= link_to image_tag(sku.picture.url(:thumb), class: "ui image fluid"), "##{sku.id}_#{URI.escape(sku.product.name)}", 
+              class: "item" + (i == 0 ? " active" : "") %>
         <% end %>
-      </ul>
     </div>
-  </div>
-  <div class="eight wide column">
-      <%= image_tag @product.skus.first.picture.url(:large), class: "ui image fluid"  %>
   </div>
   <div class="six wide column">
     <div class="ui fluid card">
       <div class="content">
-        <h3 class="ui dividing header center aligned"><%= @product.name %></h3>
-        <span class="ui blue ribbon label"><strong>In Stock:</strong> <%= @product.skus.first.quantity %></span>  
+        <h2 class="ui dividing header center aligned"><%= @product.name %></h2>
+        <span class="ui blue ribbon label">In Stock:<%= @product.skus.first.quantity %></span>  
         <h3 class="ui header center aligned nomargin"><%= number_to_currency(@product.skus.first.price, prescision: 2) %></h3>
+        <!-- Product Details -->
         <h3 class="ui dividing header">Product Details</h3>
         <div class="meta">Updated <%= time_ago_in_words(@product.skus.first.updated_at.to_time) %> ago</div>
         <div class="description">
           <p><strong>Caption:</strong> <%= @product.caption %></p>
           <p><strong>Description:</strong> <%= @product.description %></p>
         </div>
+        <h3 class="ui dividing header">Product Attributes</h3>
+        <div>
+          <% @product.skus.first.option_values.each do |option_value| %>
+            <p><strong><%= option_value.option.name  %>:</strong> <%= option_value.value %></p>
+          <% end %>
+        </div>
       </div>
       <div class="extra content">
-        <%= link_to root_path, class: "ui labeled icon fluid primary button" do %>
+        <%= button_to root_path, class: "ui labeled icon fluid primary button" do %>
           Add to Cart
           <i class="shop icon"></i>
         <% end %>

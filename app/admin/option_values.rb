@@ -11,5 +11,7 @@ ActiveAdmin.register OptionValue do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  menu false
+  menu parent: "Products"
+
+  permit_params :sku_id, :option_id, :value
 end

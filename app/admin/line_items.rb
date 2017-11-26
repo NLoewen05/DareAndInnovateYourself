@@ -11,5 +11,5 @@ ActiveAdmin.register LineItem do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-    menu false
+    menu parent: "Orders"
 end

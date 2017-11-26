@@ -4,5 +4,6 @@ class OptionValue < ApplicationRecord
   belongs_to :sku
 
   # Validations
+  validates :option, uniqueness: true
   validates :value, presence: true
 end

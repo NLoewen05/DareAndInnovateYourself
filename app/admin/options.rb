@@ -12,4 +12,6 @@ ActiveAdmin.register Option do
 #   permitted
 # end
   menu parent: "Products"
+
+  permit_params :name, :optionable
 end

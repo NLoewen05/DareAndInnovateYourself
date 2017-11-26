@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
 
   def show
     @shop = Shop.find(params[:shop_id])
-    @product = Product.includes(:skus).find(params[:id])
+    @product = Product.includes(:skus, :options).find(params[:id])
   end
 
   def search
