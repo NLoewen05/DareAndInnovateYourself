@@ -3,14 +3,14 @@
   <div class="ten wide column">
     <div class="owl-carousel">
       <% @product.skus.each do |sku| %>
-      <div data-hash="<%= "#{sku.id}" %>">
+      <div data-hash="<%= "sku_#{sku.id}" %>">
         <%= image_tag sku.picture.url(:large), class: "ui image fluid" %>
       </div>
       <% end %>
     </div>
     <div class="ui menu" data-turbolinks="false">
         <% @product.skus.each_with_index do |sku, i| %>
-          <%= link_to image_tag(sku.picture.url(:thumb), class: "ui image fluid"), "##{sku.id}", 
+          <%= link_to image_tag(sku.picture.url(:thumb), class: "ui image fluid"), "#sku_#{sku.id}", 
               class: "item" + (i == 0 ? " active" : "") %>
         <% end %>
     </div>

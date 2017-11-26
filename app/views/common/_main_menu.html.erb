@@ -12,6 +12,9 @@
   class: "ui input item" %>
   
   <div class="ui item right">
+    <%= link_to root_path, class: "item" do %>
+      <i class="shop icon"></i>
+    <% end %>
     <% if user_signed_in? %>
       <% if current_user.shop.nil? %>
         <%= link_to  "Open Your Shop!", new_shop_path, class: "item" %>
