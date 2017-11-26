@@ -3,8 +3,7 @@ class Sku < ApplicationRecord
   has_many :line_items
   has_many :orders, through: :line_items
   belongs_to :product
-  has_many :options, through: :product
-  has_many :option_values, through: :options
+  has_many :option_values
   has_attached_file :picture, styles: {
     thumb: '100x100>',
     square: '200x200#',
@@ -17,7 +16,7 @@ class Sku < ApplicationRecord
   validates :quantity, numericality: { only_integer: true}
   validates :price, numericality: true
   validates_attachment :picture, content_type: { content_type: /\Aimage\/.*\Z/ }
-  validates_associated :product, :options, :option_values
+  validates_associated :product, :option_values
 
   def name
     product.name + ' - ' + id.to_s

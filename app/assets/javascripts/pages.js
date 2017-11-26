@@ -1,6 +1,12 @@
 // Pages Javascript
 
 var ready = function(){
+  $('.owl-carousel').owlCarousel({
+    items: 1,
+    margin: 5,
+    URLhashListener: true
+  });
+
   $('.ui.dropdown').dropdown({
     action: 'select'
   });

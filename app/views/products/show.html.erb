@@ -1,10 +1,16 @@
 
 <section class="ui grid">
   <div class="ten wide column">
-    <%= image_tag @product.skus.first.picture.url(:large), class: "ui image fluid"  %>
-    <div class="ui menu">
+    <div class="owl-carousel">
+      <% @product.skus.each do |sku| %>
+      <div data-hash="<%= "#{sku.id}" %>">
+        <%= image_tag sku.picture.url(:large), class: "ui image fluid" %>
+      </div>
+      <% end %>
+    </div>
+    <div class="ui menu" data-turbolinks="false">
         <% @product.skus.each_with_index do |sku, i| %>
-          <%= link_to image_tag(sku.picture.url(:thumb), class: "ui image fluid"), "##{sku.id}_#{URI.escape(sku.product.name)}", 
+          <%= link_to image_tag(sku.picture.url(:thumb), class: "ui image fluid"), "##{sku.id}", 
               class: "item" + (i == 0 ? " active" : "") %>
         <% end %>
     </div>

@@ -14,5 +14,6 @@
 //= require turbolinks
 //= require_tree .
 //= require semantic-ui
-//= require pages
 //= require nested_form_fields
+//= require pages
+//= require owl.carousel2

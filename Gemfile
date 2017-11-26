@@ -74,3 +74,6 @@ gem 'aws-sdk', '~> 2'
 
 # Nested Form Fields
 gem 'nested_form_fields'
+
+# Owl Carousel
+gem 'owlcarousel2-rails'
