@@ -6,15 +6,17 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  get 'products/search' => 'products#search'
-  get '/products' => 'products#index'
-
   resources :shop do 
     resources :products
   end
 
-  resources :categories
+  resources :orders
 
+  resources :categories
+  
+  post 'add_to_cart/:id' => 'orders#add_to_cart', as: 'add_to_cart'
+  get 'products/search' => 'products#search'
+  get '/products' => 'products#index'
   get "stripe/charge" => "stripe#process_payment"
   get ":page" => "pages#show"
 

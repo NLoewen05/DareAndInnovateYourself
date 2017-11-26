@@ -1,4 +1,19 @@
 
+<% if flash[:notice] %>
+<div class="ui icon message">
+  <i class="shop icon"></i>
+  <div class="content">
+    <div class="header">Successfully added to shopping cart!</div>
+    <p><%= flash[:notice] %></p>
+  </div>
+  <div class="ui buttons">
+      <%= button_to  "Continue Shopping", root_path, class: "ui blue button", method: :get %>
+      <div class="or"></div>
+      <%= button_to "Checkout", new_order_path, class: "ui green button", method: :get %>
+  </div>
+</div>
+<%= session[:shopping_cart] %>
+<% end %>
 <section class="ui grid">
   <div class="ten wide column">
     <div class="owl-carousel">
@@ -16,31 +31,34 @@
     </div>
   </div>
   <div class="six wide column">
-    <div class="ui fluid card">
+    <div class="owl-carousel">
+    <% @product.skus.each do |sku| %>
+    <div class="ui fluid card" data-hash="<%= "sku_#{sku.id}"%>">
       <div class="content">
         <h2 class="ui dividing header center aligned"><%= @product.name %></h2>
-        <span class="ui blue ribbon label">In Stock:<%= @product.skus.first.quantity %></span>  
-        <h3 class="ui header center aligned nomargin"><%= number_to_currency(@product.skus.first.price, prescision: 2) %></h3>
+        <span class="ui blue ribbon label">In Stock:<%= sku.quantity %></span>  
+        <h2 class="ui header center aligned"><%= number_to_currency(sku.price, prescision: 2) %></h2>
         <!-- Product Details -->
         <h3 class="ui dividing header">Product Details</h3>
-        <div class="meta">Updated <%= time_ago_in_words(@product.skus.first.updated_at.to_time) %> ago</div>
+        <div class="meta">Updated <%= time_ago_in_words(sku.updated_at.to_time) %> ago</div>
         <div class="description">
           <p><strong>Caption:</strong> <%= @product.caption %></p>
           <p><strong>Description:</strong> <%= @product.description %></p>
         </div>
         <h3 class="ui dividing header">Product Attributes</h3>
         <div>
-          <% @product.skus.first.option_values.each do |option_value| %>
+          <% sku.option_values.each do |option_value| %>
             <p><strong><%= option_value.option.name  %>:</strong> <%= option_value.value %></p>
           <% end %>
         </div>
       </div>
       <div class="extra content">
-        <%= button_to root_path, class: "ui labeled icon fluid primary button" do %>
+        <%= button_to add_to_cart_path(sku), class: "ui labeled icon fluid primary button" do %>
           Add to Cart
           <i class="shop icon"></i>
         <% end %>
       </div>
     </div>
+    <% end %>
   </div>
 </section>

@@ -3,8 +3,16 @@
 var ready = function(){
   $('.owl-carousel').owlCarousel({
     items: 1,
-    margin: 5,
+    margin: 20,
     URLhashListener: true
+  });
+
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
   });
 
   $('.ui.dropdown').dropdown({

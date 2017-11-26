@@ -1,0 +1,13 @@
+
+<% if @cart_skus.empty? %>
+<div class="ui icon message">
+  <i class="shop icon"></i>
+  <div class="content">
+    <div class="header">There are no items in your cart</div>
+  </div>
+</div>
+<% else %>
+  <% @cart_skus.each do |sku| %>
+    <%= sku.name %>
+  <% end %>
+<% end %>

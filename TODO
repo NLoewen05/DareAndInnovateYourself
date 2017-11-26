@@ -1,9 +1,11 @@
 
 Todo:
+  These ToDos are "would wants" but with time constraint of this project
+  These are push to low priority
   ☐ Modify Tables for SKU, and Orders with regard to Tax rates
   ☐ Modify Table for OptionValue, make option_id unique
   ☐ Add Shopping Cart Functionality
     ☐ Use Cart as Session
     ☐ When User Clicks on Cart, it goes to order page
-  ☐ Add Carousel to product show page
-  ☐ 
+  ✔ Add Carousel to product show page @done(17-11-25 21:41)
+  ☐ Fix product limit on category_products partial
