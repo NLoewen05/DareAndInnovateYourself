@@ -14,7 +14,10 @@ Rails.application.routes.draw do
 
   resources :categories
   
-  post 'add_to_cart/:id' => 'orders#add_to_cart', as: 'add_to_cart'
+  post 'addtocart/:id' => 'orders#add_to_cart', as: 'add_to_cart'
+  post 'updatequantity/:id' => 'orders#update_cart_item_quantity', as: 'update_cart_item_quantity'
+  delete 'deletefromcart/:id' => 'orders#delete_from_cart', as: 'delete_from_cart'
+  delete 'deleteallcartitems' => 'orders#delete_all_from_cart'
   get 'products/search' => 'products#search'
   get '/products' => 'products#index'
   get "stripe/charge" => "stripe#process_payment"

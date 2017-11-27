@@ -1,13 +1,81 @@
 
-<% if @cart_skus.empty? %>
+<% if flash[:notice] %>
 <div class="ui icon message">
   <i class="shop icon"></i>
   <div class="content">
-    <div class="header">There are no items in your cart</div>
+    <div class="header"><%= flash[:notice] %></div>
   </div>
 </div>
-<% else %>
-  <% @cart_skus.each do |sku| %>
-    <%= sku.name %>
-  <% end %>
 <% end %>
+<section class="ui segment">
+  <% if @order.line_items.empty? %>
+  <div class="ui icon message">
+    <i class="shop icon"></i>
+    <div class="content">
+      <div class="header">There are no items in your cart</div>
+    </div>
+  </div>
+  <% else %>
+    <h2 class="ui header">Your Cart</h2>    
+      <div class="ui grid">
+        <section class="twelve wide column">
+          <table class="ui basic celled table">
+            <thead>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th></th>
+            </thead>
+            <tbody>
+                <% @order.line_items.each do |item| %>
+                <tr>
+                    <td>
+                      <h4 class="ui image header">
+                        <%= image_tag item.sku.picture.url(:thumb), class: "ui image" %>
+                        <div class="content">
+                          <%= item.sku.product.name %>
+                            <div class="sub header"><%= item.sku.product.caption %></div>
+                        </div>
+                      </h4>
+                    </td>
+                    <td>
+                      <%= number_to_currency(item.price, precision: 2) %>
+                    </td>
+                    <td>
+                      <%= form_tag update_cart_item_quantity_path(item.sku.id), class: 'ui form' do |f| %>
+                        <div class="two fields"> 
+                          <div class="field">
+                            <%= number_field_tag :quantity, item.quantity %>
+                          </div>
+                          <div class="field">
+                            <%= button_tag "Update", class: 'ui secondary button' %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= form_tag delete_from_cart_path(item.sku.id), class: 'ui form', method: "delete" do |f| %>
+                        <div class="field">
+                          <%= button_tag "Delete", class: "ui secondary button", data: { confirm: "Are you sure?"}%>
+                        </div>
+                      <% end %>
+                    </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </section>
+        <aside class="four wide column">
+          <div class="ui fluid card">
+            <div class="content">
+
+            </div>
+            <div class="extra content">
+
+            </div>
+          </div>
+        </aside>
+      </div>
+  <% end %>
+</section>
+

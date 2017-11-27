@@ -9,10 +9,12 @@
   </head>
 
   <body>
-    <%= render  "common/main_menu" unless @disable_main_menu %>
-    <%= render "common/pages_menu" if @enable_pages_menu %>
-    <div class="ui container">
+    <header class="ui header">
+      <%= render  "common/main_menu" unless @disable_main_menu %>
+      <%= render "common/pages_menu" if @enable_pages_menu %>
+    </header>
+    <main class="ui container">
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

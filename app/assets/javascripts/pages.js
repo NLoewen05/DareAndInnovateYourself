@@ -6,6 +6,11 @@ var ready = function(){
     margin: 20,
     URLhashListener: true
   });
+  
+  $(".disable-owl-swipe").on("touchstart mousedown", function(e) {
+    // Prevent carousel swipe
+    e.stopPropagation();
+  })
 
   $('.message .close')
   .on('click', function() {

@@ -1,11 +1,22 @@
 
 Todo:
-  These ToDos are "would wants" but with time constraint of this project
-  These are push to low priority
-  ☐ Modify Tables for SKU, and Orders with regard to Tax rates
+  @high
+  ✔ Add Shopping Cart Functionality @done(17-11-26 22:54)
+    ✔ Use Cart as Session @done(17-11-26 15:32)
+    ✔ When User Clicks on Cart, it goes to order page @done(17-11-26 15:32)
+    ✔ Edit, Remove Cart Items @done(17-11-26 22:54)
+  ☐ Complete Order creation process
+    ☐ User providees address
+    ☐ System displays invoice of all products with taxes applied
+    ☐ User address is saved if user opts for saving their info
+    ☐ Order and User is persisted and associated with each other
+  ☐ Integrate Stripe
+  ☐ Paginate Product Listings
+
+  These ToDos are "would wants" outside of the time constraint of this project
+  @low
+  ✔ Modify Tables for SKU, and Orders with regard to Tax rates @done(17-11-26 15:50)
   ☐ Modify Table for OptionValue, make option_id unique
-  ☐ Add Shopping Cart Functionality
-    ☐ Use Cart as Session
-    ☐ When User Clicks on Cart, it goes to order page
   ✔ Add Carousel to product show page @done(17-11-25 21:41)
   ☐ Fix product limit on category_products partial
+  ☐ Add loading icon when cart item is updated

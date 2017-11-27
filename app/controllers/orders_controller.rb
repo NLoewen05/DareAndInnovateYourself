@@ -4,15 +4,51 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @cart_skus = Sku.find(session[:shopping_cart])
+
+    session[:shopping_cart].each do |item|
+      sku = Sku.find(item['sku_id'])
+      @order.line_items.build(sku: sku, price: sku.price, quantity: item['quantity'])
+    end
+
+  end
+
+  def create
+
   end
 
   def add_to_cart
     sku = Sku.find(params[:id])
+    quantity = params[:quantity]
 
-    session[:shopping_cart] << sku.id unless session[:shopping_cart].include?(sku.id)
+    session[:shopping_cart] << {sku_id: sku.id, quantity: quantity} unless (session[:shopping_cart].collect {|i| i.sku_id} ).include?(sku.id)
 
-    redirect_back fallback_location: root_path, notice: "#{sku.product.name} added to Cart"
+    redirect_back fallback_location: root_path, notice: "#{sku.product.name} added to Cart."
+  end
+
+  def update_cart_item_quantity
+    sku = Sku.find(params[:id])
+    quantity = params[:quantity]
+
+    session[:shopping_cart].each_with_index do |item, i|
+      next unless item['sku_id'] == sku.id
+      session[:shopping_cart][i]['quantity'] = quantity
+    end
+  end
+
+  def delete_from_cart
+    sku = Sku.find(params[:id])
+
+    session[:shopping_cart].each_with_index do |item, i|
+      next unless item['sku_id'] == sku.id
+      session[:shopping_cart].delete_at(i)
+    end
+
+    redirect_back fallback_location: root_path, notice: "#{sku.product.name} has been deleted from Cart."
+  end
+
+  def delete_all_from_cart
+    session[:shopping_cart] = []
+    redirect_back fallback_location: root_path, notice: "Delete all items from cart."
   end
 
   def initialize_shopping_cart

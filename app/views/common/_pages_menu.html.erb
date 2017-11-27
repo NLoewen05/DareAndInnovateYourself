@@ -2,6 +2,7 @@
 <nav class="ui secondary pointing menu">
   <div class="ui container">
     <%= link_to "Home", root_path, class: 'item ' + (current_page?(root_path) ? 'active' : '') %>
+    <%= link_to "All Products", products_path, class: 'item ' + (current_page?(products_path) ? 'active' : '')%>
     <div class="ui pointing dropdown item">
       <div class="text">Categories</div>
       <i class="dropdown icon"></i>
