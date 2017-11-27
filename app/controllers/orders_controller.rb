@@ -20,9 +20,9 @@ class OrdersController < ApplicationController
     sku = Sku.find(params[:id])
     quantity = params[:quantity]
 
-    session[:shopping_cart] << {sku_id: sku.id, quantity: quantity} unless (session[:shopping_cart].collect {|i| i.sku_id} ).include?(sku.id)
+    session[:shopping_cart] << {sku_id: sku.id, quantity: quantity} unless (session[:shopping_cart].collect {|i| i['sku_id']} ).include?(sku.id)
 
-    redirect_back fallback_location: root_path, notice: "#{sku.product.name} added to Cart."
+    redirect_back fallback_location: root_path, notice: "#{sku.product.name} added to your Cart."
   end
 
   def update_cart_item_quantity
@@ -43,12 +43,12 @@ class OrdersController < ApplicationController
       session[:shopping_cart].delete_at(i)
     end
 
-    redirect_back fallback_location: root_path, notice: "#{sku.product.name} has been deleted from Cart."
+    redirect_back fallback_location: root_path, notice: "#{sku.product.name} has been deleted from your Cart."
   end
 
   def delete_all_from_cart
     session[:shopping_cart] = []
-    redirect_back fallback_location: root_path, notice: "Delete all items from cart."
+    redirect_back fallback_location: root_path, notice: "Deleted all items from your cart."
   end
 
   def initialize_shopping_cart

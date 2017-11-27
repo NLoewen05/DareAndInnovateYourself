@@ -1,0 +1,12 @@
+
+<section class="ui segment">
+
+
+  <div class="ui cards five column grid">
+    <%= render partial: 'product', collection: @products, as: :product %>
+  </div>
+  
+  <div class="ui grid container center aligned">
+    <%= paginate @products %>
+  </div>
+</section>

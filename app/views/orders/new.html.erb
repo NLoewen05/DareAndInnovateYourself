@@ -24,12 +24,17 @@
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
-              <th></th>
+              <th>
+                <%= button_to "Remove All", delete_all_from_cart_path,
+                                            method: 'delete',
+                                            class: 'ui tiny red button',
+                                            data: { confirm: "Are you sure?"} %>
+            </th>
             </thead>
             <tbody>
                 <% @order.line_items.each do |item| %>
                 <tr>
-                    <td>
+                    <td class="collapsing">
                       <h4 class="ui image header">
                         <%= image_tag item.sku.picture.url(:thumb), class: "ui image" %>
                         <div class="content">
@@ -48,7 +53,7 @@
                             <%= number_field_tag :quantity, item.quantity %>
                           </div>
                           <div class="field">
-                            <%= button_tag "Update", class: 'ui secondary button' %>
+                            <%= button_tag "Update", class: 'ui primary button' %>
                           </div>
                         </div>
                       <% end %>
@@ -56,7 +61,7 @@
                     <td>
                       <%= form_tag delete_from_cart_path(item.sku.id), class: 'ui form', method: "delete" do |f| %>
                         <div class="field">
-                          <%= button_tag "Delete", class: "ui secondary button", data: { confirm: "Are you sure?"}%>
+                          <%= button_tag "Remove", class: "ui red button", data: { confirm: "Are you sure?"}%>
                         </div>
                       <% end %>
                     </td>
@@ -68,7 +73,7 @@
         <aside class="four wide column">
           <div class="ui fluid card">
             <div class="content">
-
+              <h2 class="ui dividing header center aligned">Your Order</h2>
             </div>
             <div class="extra content">
 
