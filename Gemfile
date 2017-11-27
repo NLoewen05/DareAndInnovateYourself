@@ -77,3 +77,6 @@ gem 'nested_form_fields'
 
 # Owl Carousel
 gem 'owlcarousel2-rails'
+
+# Pagination
+gem 'kaminari'

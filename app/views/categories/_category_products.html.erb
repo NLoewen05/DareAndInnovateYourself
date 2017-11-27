@@ -11,23 +11,7 @@
   <%= link_to  "View all", category, class: "ui blue top right attached label" unless @disable_view_all_link %>
   <div class="ui cards five column grid">
     <% category_products.each do |product| next unless product.is_active %>
-      <div class="card">
-        <%= link_to shop_product_path(product.shop, product), class: "image" do %>
-            <%= image_tag  product.skus.first.picture.url(:medium) if product.skus.any? %>
-        <% end %>
-        <div class="content">
-          <%= link_to product.name, shop_product_path(product.shop, product), class: "header" %>
-          <div class="meta">
-            <a><%= product.shop.name %></a>
-          </div>
-          <div class="description">
-            <p><%= product.caption %></p>
-          </div>
-        </div>
-        <div class="extra content">
-          <span class="ui tag label">Price: <%= number_to_currency(product.skus.first.price, prescision: 2) if product.skus.any? %></span>
-        </div>
-      </div>
+      <%= render partial: 'products/product', object: product, as: :product %>
     <% end %>
   </div>
 </div>
