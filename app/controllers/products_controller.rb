@@ -6,7 +6,8 @@ class ProductsController < ApplicationController
       "products": []
     }
 
-    @products = Product.order(:created_at).page(params[:page])
+    # @products = Product.order(:created_at).page(params[:page])
+    @products = Product.all
 
     @json_response['products'] = @products
     

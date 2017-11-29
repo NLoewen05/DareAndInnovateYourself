@@ -20,7 +20,8 @@ Rails.application.routes.draw do
   delete 'deleteallcartitems' => 'orders#delete_all_from_cart', as: 'delete_all_from_cart'
   get 'products/search' => 'products#search'
   get '/products' => 'products#index'
-  get "stripe/charge" => "stripe#process_payment"
+  post "stripe/charge" => "stripe#process_payment"
+  post "stripe/mobile_charge" => "stripe#process_mobile_payment"
   get ":page" => "pages#show"
 
 end
