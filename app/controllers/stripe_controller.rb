@@ -1,5 +1,7 @@
 class StripeController < ApplicationController
 
+  skip_before_action :verify_authenticity_token, only: [:process_mobile_payment]
+
   respond_to :json
 
   def process_payment
