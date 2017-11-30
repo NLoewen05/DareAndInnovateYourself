@@ -24,7 +24,7 @@ class StripeController < ApplicationController
     grandTotal = params[:charge_total].to_f * 100
     
     charge =  Stripe::Charge.create(
-      :amount => grandTotal, # in cents
+      :amount => grandTotal.to_i, # in cents
       :currency => 'cad',
       :source => stripe_token,
       :description => "Mobile Test Charge"
